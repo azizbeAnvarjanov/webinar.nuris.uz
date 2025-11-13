@@ -117,7 +117,7 @@ export default function Home() {
         </div>
 
         {/* Quyidagi matn */}
-        <p className="mt-10 text-sm sm:text-base text-gray-700 leading-relaxed max-w-5xl mx-auto px-4">
+        <p className="mt-10 text-sm sm:text-base text-gray-700 leading-relaxed max-w-5xl mx-auto px-4 mb-40">
           <strong>TiniqNafas metodikasi</strong> — bu tananing o‘zini tabiiy
           yo‘l bilan tiklash tizimi. Ushbu metodikani sinab ko‘rgan insonlar
           aytishmoqda: “Yillar davomida spreyga o‘rganib qolgan edim. Endi sprey
