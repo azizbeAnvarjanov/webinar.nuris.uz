@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import LinkButton from "@/components/LinkButton";
 
 const container = {
   hidden: {},
@@ -115,58 +116,100 @@ export default function PromoCard() {
             0{mmss(timeLeft)}
           </div>
         </motion.div>
-        {/* Countdown */}
-        <motion.div
-          variants={itemUp}
-          className="flex justify-center mb-4 text-red-500"
-        >
-          <div className="text-sm text-black">
-            Hech qanday kimyoviy dori yoki operatsiyasiz — tabiiy tiklanish
-            orqali. TiniqNafas — NURIS loyihasining tabiiy nafasni tiklashga
-            ixtisoslashgan yo‘nalishi
+
+        {/* Portrait card */}
+        <motion.div variants={itemUp} className="flex justify-center -mt-2">
+          <div className="w-[350px] h-[350px] rounded-xl overflow-hidden relative bg-white">
+            {/* Rasmni public papkadan chaqiring */}
+            <Image
+              src="/ustoz.png"
+              alt="Instructor"
+              fill
+              className="w-full h-full object-cover object-top"
+            />
           </div>
         </motion.div>
 
+        {/* Big CTA */}
+        <motion.div variants={itemUp} className="mb-5">
+          <div className="w-full bg-gradient-to-b from-red-500 to-red-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg transform active:scale-98 flex items-center justify-center flex-col">
+            DOKTOR MAHMUDOV
+            <span className="text-sm font-medium">Shifokor</span>
+          </div>
+        </motion.div>
+        <motion.div variants={itemUp} className="mb-5">
+          <ul className="list-decimal pl-8 text-black">
+            <li>Shifokor</li>
+            <li>Pulmonolog (nafas tizimi mutaxassisi)</li>
+            <li>
+              15 yillik an’anaviy tibbiyot, 12 yillik alternativ tibbiyot
+              tajribasi{" "}
+            </li>
+            <li>
+              AQSH (Amerika Qo‘shma Shtatlari), Chernogoriya, Ukraina,
+              Belorussiya va Rossiya davlatlarida tajriba almashgan
+            </li>
+            <li>
+              “Xalq tabobati fidoyisi” ko‘krak nishoni bilan taqdirlangan{" "}
+            </li>
+            <li>
+              Hijoma va tabiiy muolajalar bo‘yicha ko&apos;plab shogirdlar
+              tayyorlagan{" "}
+            </li>
+          </ul>
+        </motion.div>
+
+        <motion.div variants={itemUp} className="text-black mb-4">
+          Doktor Makhmudov — o‘z faoliyatida an’anaviy tibbiyot va tabiiy
+          muolajani uyg‘unlashtirgan mutaxassis.
+        </motion.div>
         <motion.h2
           variants={itemUp}
           className="text-center text-2xl font-extrabold mb-4"
         >
-          <span className="text-gray-800">MASTERKLASSDA SIZ:</span>
+          <span className="text-gray-800">NATIJALAR HAQIDA:</span>
         </motion.h2>
-        {/* Gift card */}
-        <motion.div
-          variants={itemUp}
-          className="border-2 border-red-200 rounded-xl p-3 flex gap-3 items-center"
-        >
-          <div className="w-16 h-16 relative rounded-md flex-shrink-0 overflow-hidden flex items-center justify-center bg-red-500">
-            {/* oddiy SVG yoki rasm joyi */}
-            <Image
-              src="/gift-icon.png"
-              alt="Gift"
-              fill
-              className="w-full h-full object-contain"
-              onError={(e) => {
-                // agar rasm yo'q bo'lsa, oddiy box ko'rsatish
-                e.currentTarget.style.display = "none";
-              }}
-            />
-            {/* Agar gift-icon.png bo'lmasa, fallback */}
-            <div className="w-full h-full flex items-center justify-center text-3xl text-white font-bold">
-              01
-            </div>
-          </div>
+        <motion.div variants={itemUp} className="text-black mb-4">
+          TiniqNafas metodikasi — bu tananing o‘zini tabiiy yo‘l bilan tiklash
+          tizimi.
+        </motion.div>
+        <motion.div variants={itemUp} className="text-black mb-4">
+          Ushbu metodikani sinab ko‘rgan insonlar aytishmoqda:
+        </motion.div>
+        <motion.div variants={itemUp} className="mb-5">
+          <ul className="list-decimal pl-8 text-black">
+            <li>
+              “Yillar davomida spreyga o‘rganib qolgan edim. Endi sprey
+              ishlatmayapman.”{" "}
+            </li>
+            <li>
+              “Operatsiya qilishadi deyishgan edi. Endi hech qanday dori yoki
+              tomchisiz nafas olyapman.”{" "}
+            </li>
+            <li>
+              “Men kutgan natijadan ham yaxshi bo‘ldi. Faqat burun ochilmadi —
+              butun vujudim yengillashdi.”
+            </li>
+          </ul>
+        </motion.div>
+        <motion.div variants={itemUp} className="text-black mb-4">
+          Bu natijalar shunchaki vaqtinchalik emas.
+        </motion.div>
+        <motion.div variants={itemUp} className="text-black mb-4">
+          Bu — tananing o‘zini tuzatish mexanizmi qayta ishga tushganining
+          belgisi.
+        </motion.div>
 
-          <div className="text-black">
-            <div className="font-bold text-sm">
-              Har kuni bitadigan burunning asl sababini bilib olasiz
-            </div>
-            <div className="text-sm text-gray-700">
-              Ko‘pchilik o‘ylaydi “shunchaki shamollash”, “allergiya”, “burun
-              suyagi egri”. Aslida esa muammo chuqurda — asab, qon aylanishi va
-              limfa tizimidagi turg‘unlikda. Siz aynan o‘sha ildiz sababni
-              topasiz.
-            </div>
-          </div>
+        <motion.div variants={itemUp} className="mb-25">
+          <ul className="list-decimal pl-8 text-black">
+            <li>Sprey va tomchilarga bo‘lgan qaramlikdan chiqishmoqda </li>
+            <li>Operatsiyasiz, dorisiz, tabiiy yo‘l bilan nafas olayapti </li>
+            <li>Uyqu sifati va energiya tiklanmoqda </li>
+            <li>Hayot sifati o‘zgarib boryapti</li>
+          </ul>
+        </motion.div>
+        <motion.div variants={itemUp} className="fixed bottom-5 w-[90%]">
+          <LinkButton />
         </motion.div>
       </motion.div>
     </div>
