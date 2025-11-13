@@ -1,135 +1,174 @@
-import Timer from "@/components/Timer";
+// PromoCard.jsx
+"use client"; // agar Next.js app routerda bo'lsa
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 
-export default function Home() {
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.12,
+    },
+  },
+};
+
+const itemUp = {
+  hidden: { opacity: 0, y: 18, scale: 0.98 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
+};
+
+export default function PromoCard() {
+  const [timeLeft, setTimeLeft] = useState(111); // boshlang'ich soniya (misol)
+  // Agar real vaqtdagi sanani ishlatmoqchi bo'lsangiz, target vaqt kiriting va diff hisoblang.
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setTimeLeft((s) => (s > 0 ? s - 1 : 0));
+    }, 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  const mmss = (sec) => {
+    const m = Math.floor(sec / 60)
+      .toString()
+      .padStart(1, "0");
+    const s = (sec % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
+
   return (
-    <div className="min-h-screen w-full bg-white relative overflow-hidden">
-      {/* Fon vektorlar */}
-      <div className="absolute w-[300px] sm:w-[400px] md:w-[500px] h-[500px] sm:h-[600px] rotate-100 top-[-50px] left-[-80px] opacity-20">
-        <Image src="/vector.png" alt="" fill className="object-contain" />
-      </div>
-      <div className="absolute w-[300px] sm:w-[400px] md:w-[500px] h-[500px] sm:h-[600px] rotate-10 top-[-50px] right-[-80px] opacity-20">
-        <Image src="/vector.png" alt="" fill className="object-contain" />
-      </div>
-
-      <section className="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-10 py-10 z-10">
-        {/* Yuqori info */}
-        <div className="flex justify-center items-center gap-3 text-xl font-bold border border-black text-black rounded-xl py-3 px-6 w-fit mx-auto mb-8 bg-white/80 ">
-          <div className="sm:border-r md:block hidden border-gray-400 sm:pr-4">
+    <div className="min-h-screen bg-white flex  justify-center">
+      <motion.div
+        className="w-full max-w-lg bg-white px-6 py-6"
+        variants={container}
+        initial="hidden"
+        animate="show"
+      >
+        {/* Top tag + date/time row */}
+        <motion.div
+          variants={itemUp}
+          className="flex items-center justify-between mb-4"
+        >
+          <span className="text-sm text-gray-700 font-bold">28-Noyabr</span>
+          <button className=" bg-gradient-to-b from-red-500 to-red-600 text-white py-2 px-4 rounded-xl text-lg font-bold shadow-lg transform active:scale-98">
             Master klass
+          </button>
+          <div className="text-sm text-gray-700 font-semibold">20:00</div>
+        </motion.div>
+
+        {/* Title */}
+        <motion.h2
+          variants={itemUp}
+          className="text-center text-2xl font-extrabold mb-4"
+        >
+          <span className="text-gray-800">BURUN BITISHIDAN </span>
+          <span className="text-red-600">TABIIY YOL </span>
+          <span className="text-gray-800">BILAN QUTULING</span>
+        </motion.h2>
+
+        {/* Portrait card */}
+        <motion.div variants={itemUp} className="flex justify-center -mt-2">
+          <div className="w-[350px] h-[350px] rounded-xl overflow-hidden relative bg-white">
+            {/* Rasmni public papkadan chaqiring */}
+            <Image
+              src="/sardor.png"
+              alt="Instructor"
+              fill
+              className="w-full h-full object-cover object-top"
+            />
           </div>
-          <div className="sm:border-r border-gray-400 sm:px-4">08:00</div>
-          <div className="sm:pl-4">28.11.2025</div>
-        </div>
+        </motion.div>
 
-        <h1 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold text-black mb-10">
-          METODIKA MUALLIFLARI
-        </h1>
+        {/* Big CTA */}
+        <motion.div variants={itemUp} className="mb-5">
+          <div className="w-full bg-gradient-to-b from-red-500 to-red-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg transform active:scale-98 flex items-center justify-center flex-col">
+            SARDORBEK ISROILOV
+            <span className="text-sm font-medium">
+              Tabiiy sog‘lomlashtirish yo‘nalishidagi mutaxassis
+            </span>
+          </div>
+        </motion.div>
+        <motion.div variants={itemUp} className="mb-5">
+          <ul className="list-decimal pl-8 text-black">
+            <li>Xalqaro sertifikat sohibi</li>
+            <li>O‘zbekiston Hijoma Tabobati Akademiyasi a’zosi </li>
+            <li>Janubiy Koreyada tahsil olgan </li>
+            <li>50+ shifokor, tabib va professorlardan saboq olgan </li>
+            <li>3 ta sog‘lomlashtirish markazi asoschisi </li>
+            <li>3 yillik amaliy tajribaga ega professional hajjom va tabib </li>
+          </ul>
+        </motion.div>
 
-        {/* Mualliflar va markaz */}
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-10">
-          {/* Chapdagi muallif */}
-          <article className="w-full sm:w-[400px] md:w-[450px]">
-            <div className="w-full aspect-square relative">
-              <Image
-                src="/sardor.png"
-                alt="Sardorbek Isroilov rasmi"
-                fill
-                className="object-cover rounded-xl"
-                loading="lazy"
-              />
+        {/* Countdown */}
+        <motion.div
+          variants={itemUp}
+          className="flex justify-center mb-4 text-red-500"
+        >
+          <div className="text-5xl font-extrabold tracking-tight">
+            0{mmss(timeLeft)}
+          </div>
+        </motion.div>
+        {/* Countdown */}
+        <motion.div
+          variants={itemUp}
+          className="flex justify-center mb-4 text-red-500"
+        >
+          <div className="text-sm text-black">
+            Hech qanday kimyoviy dori yoki operatsiyasiz — tabiiy tiklanish
+            orqali. TiniqNafas — NURIS loyihasining tabiiy nafasni tiklashga
+            ixtisoslashgan yo‘nalishi
+          </div>
+        </motion.div>
+
+        <motion.h2
+          variants={itemUp}
+          className="text-center text-2xl font-extrabold mb-4"
+        >
+          <span className="text-gray-800">MASTERKLASSDA SIZ:</span>
+        </motion.h2>
+        {/* Gift card */}
+        <motion.div
+          variants={itemUp}
+          className="border-2 border-red-200 rounded-xl p-3 flex gap-3 items-center"
+        >
+          <div className="w-16 h-16 relative rounded-md flex-shrink-0 overflow-hidden flex items-center justify-center bg-red-500">
+            {/* oddiy SVG yoki rasm joyi */}
+            <Image
+              src="/gift-icon.png"
+              alt="Gift"
+              fill
+              className="w-full h-full object-contain"
+              onError={(e) => {
+                // agar rasm yo'q bo'lsa, oddiy box ko'rsatish
+                e.currentTarget.style.display = "none";
+              }}
+            />
+            {/* Agar gift-icon.png bo'lmasa, fallback */}
+            <div className="w-full h-full flex items-center justify-center text-3xl text-white font-bold">
+              01
             </div>
-            <div className="text-center py-3 rounded-xl bg-white text-black shadow-lg">
-              <h2 className="text-xl font-bold">SARDORBEK ISROILOV</h2>
-              <p className="text-sm">
-                Tabiiy sog‘lomlashtirish yo‘nalishidagi mutaxassis
-              </p>
-            </div>
-            <ul className="text-sm sm:text-base text-gray-700 space-y-2 list-disc pl-6 pt-5">
-              <li>Xalqaro sertifikat sohibi</li>
-              <li>Jamoat salomatligi bo‘yicha mutaxassis</li>
-              <li>Ko‘p yillik amaliy tajriba</li>
-              <li>Metodika muallifi</li>
-            </ul>
-          </article>
-
-          {/* Markazdagi soat va link */}
-          <div className="text-black flex-col items-center justify-center text-center h-[400px] mx-auto hidden md:flex">
-            <Timer />
-            <Link
-              href="https://t.me/AsalunAdmin"
-              className="mt-8 py-3 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-700 transition-all duration-200 rounded-full shadow-md"
-            >
-              Telegram kanalga o‘tish
-            </Link>
           </div>
 
-          <div className="z-50 fixed md:hidden bottom-28 left-1/2 rounded-full p-2 -translate-x-1/2 w-[90%] mx-auto flex items-center justify-center text-center">
-            <Link
-              href="https://t.me/AsalunAdmin"
-              className="mt-8 py-3 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-700 transition-all duration-200 rounded-full shadow-md w-full mx-auto cursor-pointer"
-            >
-              Telegram kanalga o‘tish
-            </Link>
-          </div>
-          <div className="fixed md:hidden z-50 bottom-10 left-1/2 rounded-full p-2 -translate-x-1/2 w-[90%] h-[70px] bg-blue-500 flex items-center justify-center">
-            <Timer />
-          </div>
-
-          {/* O‘ngdagi muallif */}
-          <article className="w-full sm:w-[400px] md:w-[450px]">
-            <div className="w-full aspect-square relative">
-              <Image
-                src="/ustoz.png"
-                alt="Doktor Mahmudov rasmi"
-                fill
-                className="object-cover rounded-xl"
-                loading="lazy"
-              />
+          <div className="text-black">
+            <div className="font-bold text-sm">
+              Har kuni bitadigan burunning asl sababini bilib olasiz
             </div>
-            <div className="text-center py-3 rounded-xl bg-white text-black shadow-lg">
-              <h2 className="text-xl font-bold">DOKTOR MAHMUDOV</h2>
-              <p className="text-sm">Shifokor</p>
+            <div className="text-sm text-gray-700">
+              Ko‘pchilik o‘ylaydi “shunchaki shamollash”, “allergiya”, “burun
+              suyagi egri”. Aslida esa muammo chuqurda — asab, qon aylanishi va
+              limfa tizimidagi turg‘unlikda. Siz aynan o‘sha ildiz sababni
+              topasiz.
             </div>
-            <ul className="text-sm sm:text-base text-gray-700 space-y-2 list-disc pl-6 pt-5">
-              <li>Pulmonolog (nafas tizimi mutaxassisi)</li>
-              <li>
-                15 yillik an’anaviy va 12 yillik alternativ tibbiyot tajribasi
-              </li>
-              <li>
-                AQSH, Chernogoriya, Ukraina, Belorussiya va Rossiyada tajriba
-                almashgan
-              </li>
-              <li>
-                “Xalq tabobati fidoyisi” ko‘krak nishoni bilan taqdirlangan
-              </li>
-              <li>
-                Hijoma va tabiiy muolajalar bo‘yicha ko‘plab shogirdlar
-                tayyorlagan
-              </li>
-            </ul>
-            <p className="text-sm sm:text-base text-gray-700 pt-4 px-4">
-              Doktor Makhmudov — o‘z faoliyatida an’anaviy tibbiyot va tabiiy
-              muolajani uyg‘unlashtirgan mutaxassis.
-            </p>
-          </article>
-        </div>
-
-        {/* Quyidagi matn */}
-        <p className="mt-10 text-sm sm:text-base text-gray-700 leading-relaxed max-w-5xl mx-auto px-4 mb-40">
-          <strong>TiniqNafas metodikasi</strong> — bu tananing o‘zini tabiiy
-          yo‘l bilan tiklash tizimi. Ushbu metodikani sinab ko‘rgan insonlar
-          aytishmoqda: “Yillar davomida spreyga o‘rganib qolgan edim. Endi sprey
-          ishlatmayapman.” “Operatsiya qilishadi deyishgan edi, endi hech qanday
-          dori yoki tomchisiz nafas olyapman.” “Men kutgan natijadan ham yaxshi
-          bo‘ldi — butun vujudim yengillashdi.” Bu natijalar tananing o‘zini
-          tuzatish mexanizmi qayta ishga tushganining belgisi. — Sprey va
-          tomchilarga bo‘lgan qaramlikdan chiqishmoqda — Operatsiyasiz, dorisiz,
-          tabiiy yo‘l bilan nafas olayapti — Uyqu sifati va energiya tiklanmoqda
-          — Hayot sifati o‘zgarib boryapti.
-        </p>
-      </section>
+          </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
