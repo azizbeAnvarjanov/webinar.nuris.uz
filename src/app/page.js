@@ -65,10 +65,10 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="fixed md:hidden z-50 bottom-28 left-1/2 rounded-full p-2 -translate-x-1/2 w-[90%] mx-auto flex items-center justify-center text-center">
+          <div className="z-50 fixed md:hidden bottom-28 left-1/2 rounded-full p-2 -translate-x-1/2 w-[90%] mx-auto flex items-center justify-center text-center">
             <Link
               href="https://t.me/AsalunAdmin"
-              className="mt-8 py-3 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-700 transition-all duration-200 rounded-full shadow-md w-full mx-auto"
+              className="mt-8 py-3 px-3 text-white font-semibold bg-blue-500 hover:bg-blue-700 transition-all duration-200 rounded-full shadow-md w-full mx-auto cursor-pointer"
             >
               Telegram kanalga o‘tish
             </Link>

@@ -30,7 +30,7 @@ export default function Timer() {
   const seconds = (timeLeft % 60).toString().padStart(2, "0");
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center">
       <span className="text-6xl font-bold text-center">
         {minutes}:{seconds}
       </span>
