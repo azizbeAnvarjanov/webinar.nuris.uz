@@ -47,7 +47,7 @@ export default function PromoCard() {
   return (
     <div className="min-h-screen bg-white flex  justify-center">
       <motion.div
-        className="w-full max-w-lg bg-white px-6 py-6"
+        className="w-full max-w-lg bg-white px-3 py-6"
         variants={container}
         initial="hidden"
         animate="show"
@@ -208,7 +208,17 @@ export default function PromoCard() {
             <li>Hayot sifati o‘zgarib boryapti</li>
           </ul>
         </motion.div>
-        <motion.div variants={itemUp} className="fixed bottom-5 w-[90%]">
+
+        <motion.div
+          variants={itemUp}
+          className="fixed bottom-25 w-[90%] left-[50%] translate-x-[-50%] z-50"
+        >
+          ssss
+        </motion.div>
+        <motion.div
+          variants={itemUp}
+          className="fixed bottom-5 w-[90%] left-[50%] translate-x-[-50%] z-50"
+        >
           <LinkButton />
         </motion.div>
       </motion.div>
