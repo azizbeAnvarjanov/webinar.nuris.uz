@@ -1,17 +1,25 @@
-// PromoCard.jsx
-"use client"; // agar Next.js app routerda bo'lsa
+"use client";
+
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import LinkButton from "@/components/LinkButton";
+import Instructors from "@/components/Instructors";
+
+import {
+  Stethoscope,
+  HeartPulse,
+  Activity,
+  ArrowRightCircle,
+  Pill,
+  Brain,
+  Wind,
+} from "lucide-react";
 
 const container = {
   hidden: {},
   show: {
-    transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.12,
-    },
+    transition: { staggerChildren: 0.12, delayChildren: 0.12 },
   },
 };
 
@@ -26,8 +34,7 @@ const itemUp = {
 };
 
 export default function PromoCard() {
-  const [timeLeft, setTimeLeft] = useState(111); // boshlang'ich soniya (misol)
-  // Agar real vaqtdagi sanani ishlatmoqchi bo'lsangiz, target vaqt kiriting va diff hisoblang.
+  const [timeLeft, setTimeLeft] = useState(111);
 
   useEffect(() => {
     const t = setInterval(() => {
@@ -44,183 +51,146 @@ export default function PromoCard() {
     return `${m}:${s}`;
   };
 
+  const cards = [
+    {
+      order: "01",
+      icon: <Wind size={26} className="text-sky-600" />,
+      question: "Burun bitishining asl sababi",
+      answer:
+        "Asosiy muammo ko‘pincha asab tarangligi, qon aylanishi va limfa turg‘unligida bo‘ladi.",
+    },
+    {
+      order: "02",
+      icon: <Pill size={26} className="text-red-500" />,
+      question: "Nega doridan keyin qaytadi?",
+      answer:
+        "Tomchi yo‘lni ochadi, lekin ichki shish va yallig‘lanish qoladi shu sabab qayta bitadi.",
+    },
+    {
+      order: "03",
+      icon: <HeartPulse size={26} className="text-pink-600" />,
+      question: "3 daqiqalik tabiiy mashqlar",
+      answer: "Uyda bajariladigan, xavfsiz mashqlar nafasni tez ochadi.",
+    },
+    {
+      order: "04",
+      icon: <Brain size={26} className="text-purple-600" />,
+      question: "Tana va asab tizimi uyg‘unligi",
+      answer:
+        "Nafas ochilishi fikr, hissiyot va asab tizimiga bevosita bog‘liq.",
+    },
+    {
+      order: "05",
+      icon: <Activity size={26} className="text-green-600" />,
+      question: "Erkin nafasga yetish usullari",
+      answer:
+        "Kundalik sodda odatlar orqali burun doim ochiq va nafas yengil bo‘ladi.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-white flex  justify-center">
+    <div className="min-h-screen bg-white flex justify-center">
       <motion.div
         className="w-full max-w-lg bg-white px-3 py-6"
         variants={container}
         initial="hidden"
         animate="show"
       >
-        {/* Top tag + date/time row */}
+        {/* TOP */}
         <motion.div
           variants={itemUp}
-          className="flex items-center justify-between mb-4"
+          className="flex items-center justify-between mb-6"
         >
           <span className="text-sm text-gray-700 font-bold">28-Noyabr</span>
-          <button className=" bg-gradient-to-b from-red-500 to-red-600 text-white py-2 px-4 rounded-xl text-lg font-bold shadow-lg transform active:scale-98">
-            Master klass
-          </button>
+
+          <div className="flex items-center gap-2 bg-sky-600 text-white px-4 py-2 rounded-xl shadow-md">
+            <Stethoscope size={18} />
+            <span className="text-md font-bold">Master klass</span>
+          </div>
+
           <div className="text-sm text-gray-700 font-semibold">20:00</div>
         </motion.div>
 
         {/* Title */}
         <motion.h2
           variants={itemUp}
-          className="text-center text-2xl font-extrabold mb-4"
+          className="text-center text-3xl font-extrabold mb-3 leading-snug"
         >
           <span className="text-gray-800">BURUN BITISHIDAN </span>
-          <span className="text-red-600">TABIIY YOL </span>
+          <span className="text-sky-600">TABIIY YO‘L </span>
           <span className="text-gray-800">BILAN QUTULING</span>
         </motion.h2>
 
-        {/* Portrait card */}
-        <motion.div variants={itemUp} className="flex justify-center -mt-2">
-          <div className="w-[350px] h-[350px] rounded-xl overflow-hidden relative bg-white">
-            {/* Rasmni public papkadan chaqiring */}
-            <Image
-              src="/sardor.png"
-              alt="Instructor"
-              fill
-              className="w-full h-full object-cover object-top"
-            />
-          </div>
+        <motion.div
+          variants={itemUp}
+          className="text-center text-black mb-3 bg-sky-50 p-3 rounded-lg border border-sky-200"
+        >
+          Hech qanday kimyoviy dori yoki operatsiyasiz tabiiy tiklanish orqali.
         </motion.div>
 
-        {/* Big CTA */}
-        <motion.div variants={itemUp} className="mb-5">
-          <div className="w-full bg-gradient-to-b from-red-500 to-red-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg transform active:scale-98 flex items-center justify-center flex-col">
-            SARDORBEK ISROILOV
-            <span className="text-sm font-medium">
-              Tabiiy sog‘lomlashtirish yo‘nalishidagi mutaxassis
-            </span>
-          </div>
+        <motion.div variants={itemUp} className="text-center text-black mb-5">
+          TiniqNafas — NURIS loyihasining tabiiy nafasni tiklashga
+          ixtisoslashgan yo‘nalishi
         </motion.div>
-        <motion.div variants={itemUp} className="mb-5">
-          <ul className="list-decimal pl-8 text-black">
-            <li>Xalqaro sertifikat sohibi</li>
-            <li>O‘zbekiston Hijoma Tabobati Akademiyasi a’zosi </li>
-            <li>Janubiy Koreyada tahsil olgan </li>
-            <li>50+ shifokor, tabib va professorlardan saboq olgan </li>
-            <li>3 ta sog‘lomlashtirish markazi asoschisi </li>
-            <li>3 yillik amaliy tajribaga ega professional hajjom va tabib </li>
-          </ul>
-        </motion.div>
+
+        <LinkButton />
 
         {/* Countdown */}
         <motion.div
           variants={itemUp}
-          className="flex justify-center mb-4 text-red-500"
+          className="flex justify-center my-4 text-sky-600"
         >
-          <div className="text-5xl font-extrabold tracking-tight">
+          <div className="text-5xl font-extrabold tracking-tight drop-shadow-sm text-red-600">
             0{mmss(timeLeft)}
           </div>
         </motion.div>
 
-        {/* Portrait card */}
-        <motion.div variants={itemUp} className="flex justify-center -mt-2">
-          <div className="w-[350px] h-[350px] rounded-xl overflow-hidden relative bg-white">
-            {/* Rasmni public papkadan chaqiring */}
-            <Image
-              src="/ustoz.png"
-              alt="Instructor"
-              fill
-              className="w-full h-full object-cover object-top"
-            />
-          </div>
-        </motion.div>
-
-        {/* Big CTA */}
-        <motion.div variants={itemUp} className="mb-5">
-          <div className="w-full bg-gradient-to-b from-red-500 to-red-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg transform active:scale-98 flex items-center justify-center flex-col">
-            DOKTOR MAHMUDOV
-            <span className="text-sm font-medium">Shifokor</span>
-          </div>
-        </motion.div>
-        <motion.div variants={itemUp} className="mb-5">
-          <ul className="list-decimal pl-8 text-black">
-            <li>Shifokor</li>
-            <li>Pulmonolog (nafas tizimi mutaxassisi)</li>
-            <li>
-              15 yillik an’anaviy tibbiyot, 12 yillik alternativ tibbiyot
-              tajribasi{" "}
-            </li>
-            <li>
-              AQSH (Amerika Qo‘shma Shtatlari), Chernogoriya, Ukraina,
-              Belorussiya va Rossiya davlatlarida tajriba almashgan
-            </li>
-            <li>
-              “Xalq tabobati fidoyisi” ko‘krak nishoni bilan taqdirlangan{" "}
-            </li>
-            <li>
-              Hijoma va tabiiy muolajalar bo‘yicha ko&apos;plab shogirdlar
-              tayyorlagan{" "}
-            </li>
-          </ul>
-        </motion.div>
-
-        <motion.div variants={itemUp} className="text-black mb-4">
-          Doktor Makhmudov — o‘z faoliyatida an’anaviy tibbiyot va tabiiy
-          muolajani uyg‘unlashtirgan mutaxassis.
-        </motion.div>
+        {/* Divider */}
         <motion.h2
           variants={itemUp}
-          className="text-center text-2xl font-extrabold mb-4"
+          className="text-center text-2xl font-extrabold mb-4 text-gray-800"
         >
-          <span className="text-gray-800">NATIJALAR HAQIDA:</span>
+          MASTERKLASSDA SIZ:
         </motion.h2>
-        <motion.div variants={itemUp} className="text-black mb-4">
-          TiniqNafas metodikasi — bu tananing o‘zini tabiiy yo‘l bilan tiklash
-          tizimi.
-        </motion.div>
-        <motion.div variants={itemUp} className="text-black mb-4">
-          Ushbu metodikani sinab ko‘rgan insonlar aytishmoqda:
-        </motion.div>
-        <motion.div variants={itemUp} className="mb-5">
-          <ul className="list-decimal pl-8 text-black">
-            <li>
-              “Yillar davomida spreyga o‘rganib qolgan edim. Endi sprey
-              ishlatmayapman.”{" "}
-            </li>
-            <li>
-              “Operatsiya qilishadi deyishgan edi. Endi hech qanday dori yoki
-              tomchisiz nafas olyapman.”{" "}
-            </li>
-            <li>
-              “Men kutgan natijadan ham yaxshi bo‘ldi. Faqat burun ochilmadi —
-              butun vujudim yengillashdi.”
-            </li>
-          </ul>
-        </motion.div>
-        <motion.div variants={itemUp} className="text-black mb-4">
-          Bu natijalar shunchaki vaqtinchalik emas.
-        </motion.div>
-        <motion.div variants={itemUp} className="text-black mb-4">
-          Bu — tananing o‘zini tuzatish mexanizmi qayta ishga tushganining
-          belgisi.
-        </motion.div>
 
-        <motion.div variants={itemUp} className="mb-25">
-          <ul className="list-decimal pl-8 text-black">
-            <li>Sprey va tomchilarga bo‘lgan qaramlikdan chiqishmoqda </li>
-            <li>Operatsiyasiz, dorisiz, tabiiy yo‘l bilan nafas olayapti </li>
-            <li>Uyqu sifati va energiya tiklanmoqda </li>
-            <li>Hayot sifati o‘zgarib boryapti</li>
-          </ul>
-        </motion.div>
+        {/* CARD LIST */}
+        {cards.map((card, i) => (
+          <motion.div
+            key={i}
+            variants={itemUp}
+            className="text-black mb-4 flex gap-4 shadow-lg border border-sky-300 rounded-xl p-4 bg-gradient-to-r from-white to-sky-50"
+          >
+            {/* Number */}
+            <div className="min-w-[60px] min-h-[60px] bg-sky-600 rounded-xl flex items-center justify-center text-white font-bold text-2xl shadow-lg">
+              {card.order}
+            </div>
 
+            {/* Text */}
+            <div className="flex flex-col">
+              <span className="text-gray-900 font-bold flex items-center gap-2">
+                {card.icon}
+                {card.question}
+              </span>
+              <span className="text-sm text-gray-700">{card.answer}</span>
+            </div>
+          </motion.div>
+        ))}
+
+        {/* Fixed Countdown */}
+        <div className="fixed w-[50%] bottom-22 left-1/2 -translate-x-1/2 z-50 bg-red-600 h-[50px] flex items-center justify-center text-3xl font-bold rounded-full shadow-2xl text-white animate-pulse">
+          0{mmss(timeLeft)}
+        </div>
+
+        {/* Fixed CTA */}
         <motion.div
           variants={itemUp}
-          className="fixed bottom-25 w-[90%] left-[50%] translate-x-[-50%] z-50"
-        >
-          ssss
-        </motion.div>
-        <motion.div
-          variants={itemUp}
-          className="fixed bottom-5 w-[90%] left-[50%] translate-x-[-50%] z-50"
+          className="fixed bottom-5 w-[90%] left-1/2 -translate-x-1/2 z-50"
         >
           <LinkButton />
         </motion.div>
+
+        {/* Instructors section (already beautiful) */}
+        <Instructors />
       </motion.div>
     </div>
   );

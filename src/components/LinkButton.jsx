@@ -3,11 +3,11 @@ import React from "react";
 const LinkButton = () => {
   return (
     <a
-      href="https://t.me/AsalunAdmin"
+      href="https://t.me/NurisTiniqNafas"
       target="_blank"
       rel="noopener noreferrer"
     >
-      <button className="relative overflow-hidden w-full bg-gradient-to-b from-red-500 to-red-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg transform active:scale-98 animate-[pulseScale_1.4s_ease_infinite] w-full">
+      <button className="z-50 relative overflow-hidden w-full bg-gradient-to-b from-red-500 to-red-600 text-white py-4 rounded-xl text-lg font-bold shadow-lg transform active:scale-98 animate-[pulseScale_1.4s_ease_infinite] w-full">
         BEPUL QATNASHISH
         <span className="ml-2 inline-block bg-white text-red-600 rounded-full w-7 h-7 flex items-center justify-center font-bold animate-[iconBounce_1s_infinite]">
           ›
